@@ -1,25 +1,26 @@
 from dotenv import load_dotenv
+# from livekit.agents import AutoAgent
 from livekit import agents
 from livekit.agents import AgentSession, Agent, RoomInputOptions
 from livekit.plugins import (
     google,
     noise_cancellation,
 )
+from prompt import instructions1,response_prompt                   
 
 load_dotenv()
 
 
 class Assistant(Agent):
     def __init__(self) -> None:
-        super().__init__(instructions="You are a helpful voice AI assistant.")
+        super().__init__(instructions=instructions1)
 
-from promt import instructions1, response_prompt 
 
 async def entrypoint(ctx: agents.JobContext):
     session = AgentSession(
         llm=google.beta.realtime.RealtimeModel(
         model="gemini-2.0-flash-exp",
-        voice="Puck",
+        voice="Leda",
         temperature=0.8,
         instructions=instructions1,
         )
@@ -36,7 +37,7 @@ async def entrypoint(ctx: agents.JobContext):
     )
 
     await session.generate_reply(
-        instructions=response_prompt    
+        instructions=response_prompt
     )
 
 
