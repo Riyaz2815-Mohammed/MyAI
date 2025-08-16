@@ -1,0 +1,3 @@
+LIVEKIT_URL=wss://myai-xwyozwps.livekit.cloud
+LIVEKIT_API_KEY=APIixihuXBp2bzi
+LIVEKIT_API_SECRET=zQoVnFAL8NhJls0t1pd8xuCfyblintHNmEvq5kjMxez
