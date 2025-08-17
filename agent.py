@@ -1,3 +1,6 @@
+
+
+
 from dotenv import load_dotenv
 # from livekit.agents import AutoAgent
 from livekit import agents
@@ -20,7 +23,7 @@ async def entrypoint(ctx: agents.JobContext):
     session = AgentSession(
         llm=google.beta.realtime.RealtimeModel(
         model="gemini-2.0-flash-exp",
-        voice="Leda",
+        voice="Kore",
         temperature=0.8,
         instructions=instructions1,
         )
