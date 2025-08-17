@@ -1,4 +1,5 @@
 import webbrowser
+import os
 # Open Chrome or any website
 def open_chrome():
     webbrowser.open("https://www.google.com")
@@ -7,6 +8,9 @@ def open_chrome():
 def open_website(url):
     webbrowser.open(url)
     return f"Opened {url} for you!"
+def open_notepad():
+    os.system("notepad")
+    return "Notes Thane ok"
 """
 # Open Camera
 def open_camera():
