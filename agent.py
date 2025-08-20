@@ -16,8 +16,7 @@ class Assistant(Agent):
         super().__init__(
             instructions=instructions1,
             llm=google.beta.realtime.RealtimeModel(
-            model="gemini-2.0-flash-exp",
-            voice="Kore",
+            voice="Aoede",
             temperature=0.8,
         )
         )
@@ -36,13 +35,13 @@ async def entrypoint(ctx: agents.JobContext):
             # - If self-hosting, omit this parameter
             # - For telephony applications, use `BVCTelephony` for best results
             video_enabled=True,
-            audio_enabled=True,
             noise_cancellation=noise_cancellation.BVC(),
         ),
     )
 
     await session.generate_reply(
         instructions=response_prompt
+        # Use the response_prompt defined in prompt.py      
 
     )
 
