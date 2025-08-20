@@ -1,15 +1,13 @@
 from dotenv import load_dotenv
-# from livekit.agents import AutoAgent
 from livekit import agents
 from livekit.agents import AgentSession, Agent, RoomInputOptions
 from livekit.plugins import (
-    google,
     noise_cancellation,
 )
+from livekit.plugins import google
 from prompt import instructions1,response_prompt                   
-
+from tools import get_weather, search_web, send_email
 load_dotenv()
-
 
 class Assistant(Agent):
     def __init__(self) -> None:
@@ -18,15 +16,22 @@ class Assistant(Agent):
             llm=google.beta.realtime.RealtimeModel(
             voice="Aoede",
             temperature=0.8,
+        ),
+            tools=[
+                get_weather,
+                search_web,
+                send_email
+            ],
+
         )
-        )
+        
 
 
 async def entrypoint(ctx: agents.JobContext):
     session = AgentSession(
         
-        )
-    
+    )
+
     await session.start(
         room=ctx.room,
         agent=Assistant(),
@@ -39,10 +44,10 @@ async def entrypoint(ctx: agents.JobContext):
         ),
     )
 
-    await session.generate_reply(
-        instructions=response_prompt
-        # Use the response_prompt defined in prompt.py      
+    await ctx.connect()
 
+    await session.generate_reply(
+        instructions=response_prompt,
     )
 
 
